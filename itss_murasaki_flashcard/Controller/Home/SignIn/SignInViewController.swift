@@ -9,15 +9,13 @@
 import UIKit
 import FirebaseAuth
 
-protocol SignInDelegate: class {
+protocol SignInDelegate: AnyObject {
     func didSignIn()
 }
 
 class SignInViewController: BaseViewController {
     
-    @IBOutlet weak var facebookImageView: UIImageView!
     @IBOutlet weak var functionView: UIView!
-    @IBOutlet weak var twitterImageView: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
@@ -45,13 +43,6 @@ extension SignInViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissView))
         tap.delegate = self
         view.addGestureRecognizer(tap)
-        let facebookTap = UITapGestureRecognizer(target: self, action: #selector(facebookLogin))
-        facebookTap.delegate = self
-        facebookImageView.addGestureRecognizer(facebookTap)
-        let twitterTap = UITapGestureRecognizer(target: self, action: #selector(twitterLogin))
-        twitterTap.delegate = self
-        twitterImageView.addGestureRecognizer(twitterTap)
-        
     }
     
     @objc func dismissView() {
@@ -66,20 +57,7 @@ extension SignInViewController {
         return emailTextField.isEditing || passwordTextField.isEditing
     }
     
-    @objc func facebookLogin() {
-        
-    }
-    
-    @objc func twitterLogin() {
-        
-    }
-    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
-        if gestureRecognizer.view == facebookImageView || gestureRecognizer.view == twitterImageView {
-            return true
-        }
-        
         if touch.view?.isDescendant(of: functionView) == true {
             return false
         }

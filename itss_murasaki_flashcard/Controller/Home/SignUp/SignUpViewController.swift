@@ -9,15 +9,13 @@
 import UIKit
 import FirebaseAuth
 
-protocol SignUpDelegate: class {
+protocol SignUpDelegate: AnyObject {
     func didSignUp()
 }
 
 class SignUpViewController: BaseViewController {
     
     @IBOutlet weak var functionView: UIView!
-    @IBOutlet weak var facebookImageView: UIImageView!
-    @IBOutlet weak var twitterImageView: UIImageView!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var emailTexField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
@@ -46,12 +44,6 @@ extension SignUpViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissView))
         tap.delegate = self
         view.addGestureRecognizer(tap)
-        let facebookTap = UITapGestureRecognizer(target: self, action: #selector(facebookLogin))
-        facebookTap.delegate = self
-        facebookImageView.addGestureRecognizer(facebookTap)
-        let twitterTap = UITapGestureRecognizer(target: self, action: #selector(twitterLogin))
-        twitterTap.delegate = self
-        twitterImageView.addGestureRecognizer(twitterTap)
     }
     
     @objc func dismissView() {
@@ -65,13 +57,7 @@ extension SignUpViewController {
     func checkEditing() -> Bool {
         return emailTexField.isEditing || passWordTextField.isEditing || confirmPassWordTextField.isEditing
     }
-    
-    @objc func facebookLogin() {
-    }
-    
-    @objc func twitterLogin() {
-    }
-    
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
          if touch.view?.isDescendant(of: functionView) == true {
             return false
