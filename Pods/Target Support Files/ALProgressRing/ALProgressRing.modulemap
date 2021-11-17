@@ -1,0 +1,6 @@
+framework module ALProgressRing {
+  umbrella header "ALProgressRing-umbrella.h"
+
+  export *
+  module * { export * }
+}
